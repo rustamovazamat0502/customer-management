@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static 'accounts/css/content.css' %}">
+{% endblock style %}
+
+
+{% block content %}
+<div class="content-section mt-3 bg-dark text-white text-center">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Create Order</legend>
+            <h5>Are you sure you want to delete "{{ order }}" ?</h5>
+        </fieldset>
+        <div class="form-group mt-3 d-grid gap-2">
+            <input class="btn btn-lg btn-outline-danger btn-block" type="submit" value="Yes, Delete">
+            <a class="btn btn-lg btn-outline-warning btn-block" href="{% url 'home' %}">Cancel</a>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

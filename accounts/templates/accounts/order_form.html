@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static 'accounts/css/content.css' %}">
+{% endblock style %}
+
+
+{% block content %}
+{% if 'update' in request.path %}
+<div class="content-section mt-3 bg-dark text-white">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Update Order</legend>
+            {{ form }}
+        </fieldset>
+        <div class="form-group mt-3 d-grid gap-2 col-2">
+            <input class="btn btn-primary" type="submit" value="Update">
+        </div>
+    </form>
+</div>
+{% else %}
+<div class="content-section mt-3 bg-dark text-white">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Create Order</legend>
+            {{ formset.management_form }}
+            {% for form in formset %}
+            <div class="col-12">
+                <div class="col-6">
+                    {{ form }}
+                </div>
+                <hr>
+                <div class="col-6">
+                    {{ form }}
+                </div>
+                <hr>
+            </div>
+            {% endfor %}
+        </fieldset>
+        <div class="form-group mt-3 d-grid gap-2 col-2">
+            <input class="btn btn-success" type="submit" value="Create">
+        </div>
+    </form>
+</div>
+
+{% endif %}
+
+{% endblock content %}
